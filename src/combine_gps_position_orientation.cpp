@@ -67,8 +67,8 @@ void CombineGPSPositionOrientation::CallbackSentence(const nmea_msgs::SentenceCo
 		Publication();
 
 		/* std::cout << msg->sentence << std::endl; */
-		std::cout << "splited_sentence[index] = " << splited_sentence[index].c_str() << std::endl;
-		std::cout << "yaw[deg] = " << yaw/M_PI*180.0 << std::endl;
+		/* std::cout << "splited_sentence[index] = " << splited_sentence[index].c_str() << std::endl; */
+		/* std::cout << "yaw[deg] = " << yaw/M_PI*180.0 << std::endl; */
 	}
 }
 
