@@ -83,7 +83,7 @@ std::vector<std::string> CombineGPSPositionOrientation::SplitSentence(std::strin
 		words.push_back(word);
 		/* std::cout << "word.c_str() = " << word.c_str() << std::endl; */
 	}
-	std::string last_word = sentence.substr(position, sentence.length()-1-position);
+	std::string last_word = sentence.substr(position, sentence.length()-position);
 	words.push_back(last_word);
 	/* std::cout << "last_word.c_str() = " << last_word.c_str() << std::endl; */
 
