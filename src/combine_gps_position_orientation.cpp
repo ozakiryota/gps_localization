@@ -56,8 +56,8 @@ void CombineGPSPositionOrientation::CallbackSentence(const nmea_msgs::SentenceCo
 	const std::string type = "$GPVTG";
 	const int index = 1;
 	if(msg->sentence.find(type.c_str()) != std::string::npos){
-		std::vector<std::string> splited_sentence = SplitSentence(msg->sentence, std::string(","));
-		double yaw = DegToRad( std::stod(splited_sentence[index]) );
+		std::vector<std::string> splitted_sentence = SplitSentence(msg->sentence, std::string(","));
+		double yaw = DegToRad( std::stod(splitted_sentence[index]) );
 		/* yaw += M_PI; //convet to utm */
 		yaw = NorthBaseToUTM(yaw);
 		yaw = PiToPi(yaw);
@@ -67,7 +67,7 @@ void CombineGPSPositionOrientation::CallbackSentence(const nmea_msgs::SentenceCo
 		Publication();
 
 		/* std::cout << msg->sentence << std::endl; */
-		/* std::cout << "splited_sentence[index] = " << splited_sentence[index].c_str() << std::endl; */
+		/* std::cout << "splitted_sentence[index] = " << splitted_sentence[index].c_str() << std::endl; */
 		/* std::cout << "yaw[deg] = " << yaw/M_PI*180.0 << std::endl; */
 	}
 }
@@ -76,11 +76,10 @@ std::vector<std::string> CombineGPSPositionOrientation::SplitSentence(std::strin
 {
 	std::vector<std::string> words;
 	size_t position = 0;
-	/* size_t next; */
 	while(sentence.find(delimiter.c_str(), position) != std::string::npos){
 		size_t next = sentence.find(delimiter.c_str(), position);
 		std::string word = sentence.substr(position, next-position);
-		position = next + 1;
+		position = next + delimiter.length();
 		words.push_back(word);
 		/* std::cout << "word.c_str() = " << word.c_str() << std::endl; */
 	}
