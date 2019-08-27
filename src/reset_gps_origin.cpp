@@ -18,6 +18,7 @@ class ResetGPSOrigin{
 		tf::Quaternion q_ini_position;
 		tf::Quaternion q_ini_orientation;
 		double map_origin[2];	//utm(x, y)
+		double threshold_covariance;
 		/*flags*/
 		bool inipose_is_available = false;
 		/*fram_id*/
@@ -39,59 +40,14 @@ ResetGPSOrigin::ResetGPSOrigin()
 	nhPrivate.param("child_frame_id", child_frame_id_name, std::string("/gps_odom/reset_origin"));
 	nhPrivate.param("map_origin_x", map_origin[0], 416892.838);
 	nhPrivate.param("map_origin_y", map_origin[1], 3993537.078);
+	nhPrivate.param("threshold_covariance", threshold_covariance, 10.0);
 	std::cout <<" map_origin[0] = " << map_origin[0] << std::endl;
 	std::cout <<" map_origin[1] = " << map_origin[1] << std::endl;
+	std::cout <<" threshold_covariance = " << threshold_covariance << std::endl;
 }
 
 void ResetGPSOrigin::CallbackOdom(const nav_msgs::OdometryConstPtr& msg)
 {
-	// tf::Quaternion q_raw_position;
-	// tf::Quaternion q_raw_orientation;
-	// tf::Quaternion q_relative_position;
-	// tf::Quaternion q_relative_orientation;
-    //
-	// q_raw_position = tf::Quaternion(
-	// 	msg->pose.pose.position.x,
-	// 	msg->pose.pose.position.y,
-	// 	msg->pose.pose.position.z,
-	// 	0.0
-	// );
-	// quaternionMsgToTF(msg->pose.pose.orientation, q_raw_orientation);
-	// if(!inipose_is_available){
-	// 	q_ini_position = q_raw_position;
-	// 	q_ini_orientation = q_raw_orientation;
-	// 	inipose_is_available = true;
-	// }
-	// else{
-	// 	#<{(|compute relative|)}>#
-	// 	q_relative_position = tf::Quaternion(
-	// 		q_raw_position.x() - q_ini_position.x(),
-	// 		q_raw_position.y() - q_ini_position.y(),
-	// 		q_raw_position.z() - q_ini_position.z(),
-	// 		0.0
-	// 	);
-	// 	q_relative_position = q_ini_orientation.inverse()*q_relative_position*q_ini_orientation;
-	// 	q_relative_orientation = q_ini_orientation.inverse()*q_raw_orientation;
-    //
-	// 	#<{(|input|)}>#
-	// 	odom_pub.header.frame_id = parent_frame_id_name;
-	// 	odom_pub.child_frame_id = child_frame_id_name;
-	// 	odom_pub.header.stamp = msg->header.stamp;
-	// 	odom_pub.pose.pose.position.x = q_relative_position.x();
-	// 	odom_pub.pose.pose.position.y = q_relative_position.y();
-	// 	// odom_pub.pose.pose.position.z = q_relative_position.z();
-	// 	odom_pub.pose.pose.position.z = 0;
-	// 	quaternionTFToMsg(q_relative_orientation, odom_pub.pose.pose.orientation);
-	// 	odom_pub.twist = msg->twist;
-    //
-	// 	#<{(|fit to map|)}>#
-	// 	odom_pub.pose.pose.position.x -= map_origin[0];
-	// 	odom_pub.pose.pose.position.y -= map_origin[1];
-    //
-	// 	#<{(|publish|)}>#
-	// 	Publication();
-	// }
-	
 	/*input*/
 	odom_pub = *msg;
 	odom_pub.header.frame_id = parent_frame_id_name;
@@ -102,7 +58,7 @@ void ResetGPSOrigin::CallbackOdom(const nav_msgs::OdometryConstPtr& msg)
 	odom_pub.pose.pose.position.y -= map_origin[1];
 
 	/*publish*/
-	Publication();
+	if(msg->pose.covariance[0]<threshold_covariance)	Publication();
 }
 
 void ResetGPSOrigin::Publication(void)

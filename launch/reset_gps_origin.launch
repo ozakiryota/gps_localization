@@ -35,6 +35,7 @@
 		<param name="map_origin_y" type="double" value="3993537.078"/>
 		<!-- <param name="map_origin_x" type="double" value="0"/> -->
 		<!-- <param name="map_origin_y" type="double" value="0"/> -->
+		<param name="threshold_covariance" type="double" value="5.0"/>
 	</node>
 
 	<!-- comparisons -->
