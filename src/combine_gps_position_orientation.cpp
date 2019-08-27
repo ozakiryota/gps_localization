@@ -38,10 +38,10 @@ CombineGPSPositionOrientation::CombineGPSPositionOrientation()
 {
 	sub_odom = nh.subscribe("/gps/odom", 1, &CombineGPSPositionOrientation::CallbackOdom, this);
 	sub_sentence = nh.subscribe("nmea_sentence", 1, &CombineGPSPositionOrientation::CallbackSentence, this);
-	pub_odom = nh.advertise<nav_msgs::Odometry>("/gps/odom/with_orientation", 1);
+	pub_odom = nh.advertise<nav_msgs::Odometry>("/gps/odom/with_direction", 1);
 
 	nhPrivate.param("parent_frame_id", parent_frame_id_name, std::string("/odom"));
-	nhPrivate.param("child_frame_id", child_frame_id_name, std::string("/gps/odom/with_orientation"));
+	nhPrivate.param("child_frame_id", child_frame_id_name, std::string("/gps/odom/with_direction"));
 }
 
 void CombineGPSPositionOrientation::CallbackOdom(const nav_msgs::OdometryConstPtr& msg)

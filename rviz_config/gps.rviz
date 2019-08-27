@@ -5,7 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /Status1
       Splitter Ratio: 0.5
     Tree Height: 475
   - Class: rviz/Selection
@@ -56,7 +55,7 @@ Visualization Manager:
       Length: 1
       Name: Odometry
       Position Tolerance: 0.100000001
-      Topic: /gps/odom/with_orientation/reset_origin
+      Topic: /gps/odom/with_direction/reset_origin
       Value: true
     - Class: rviz/Image
       Enabled: true
@@ -82,7 +81,7 @@ Visualization Manager:
       Length: 5
       Name: Axes
       Radius: 1
-      Reference Frame: gps/odom/with_orientation/reset_origin
+      Reference Frame: gps/odom/with_direction/reset_origin
       Value: true
   Enabled: true
   Global Options:

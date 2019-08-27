@@ -24,13 +24,13 @@
 	<!-- main -->
 	<node pkg="gps_localization" name="combine_gps_position_orientation" type="combine_gps_position_orientation" output="screen">
 		<param name="parent_frame_id" type="string" value="/utm"/>
-		<param name="child_frame_id" type="string" value="/gps/odom/with_orientation"/>
+		<param name="child_frame_id" type="string" value="/gps/odom/with_direction"/>
 	</node>
 	<node pkg="gps_localization" name="reset_gps_origin" type="reset_gps_origin" output="screen">
-		<remap from="/odom" to="/gps/odom/with_orientation"/>
-		<remap from="/odom/reset_origin" to="/gps/odom/with_orientation/reset_origin"/>
+		<remap from="/odom" to="/gps/odom/with_direction"/>
+		<remap from="/odom/reset_origin" to="/gps/odom/with_direction/reset_origin"/>
 		<param name="parent_frame_id" type="string" value="/utm/reset_origin"/>
-		<param name="child_frame_id" type="string" value="/gps/odom/with_orientation/reset_origin"/>
+		<param name="child_frame_id" type="string" value="/gps/odom/with_direction/reset_origin"/>
 		<param name="map_origin_x" type="double" value="416892.838"/>
 		<param name="map_origin_y" type="double" value="3993537.078"/>
 		<!-- <param name="map_origin_x" type="double" value="0"/> -->
