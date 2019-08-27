@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(gps_localization)
+project(gps_semi_driver)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -106,7 +106,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES gps_localization
+#  LIBRARIES gps_semi_driver
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
@@ -123,24 +123,24 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(gps_localization
-#   src/${PROJECT_NAME}/gps_localization.cpp
+# add_library(gps_semi_driver
+#   src/${PROJECT_NAME}/gps_semi_driver.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(gps_localization ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(gps_semi_driver ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(gps_localization_node src/gps_localization_node.cpp)
+# add_executable(gps_semi_driver_node src/gps_semi_driver_node.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(gps_localization_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(gps_semi_driver_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(gps_localization_node
+# target_link_libraries(gps_semi_driver_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -159,7 +159,7 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS gps_localization gps_localization_node
+# install(TARGETS gps_semi_driver gps_semi_driver_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -184,7 +184,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_gps_localization.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_gps_semi_driver.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
