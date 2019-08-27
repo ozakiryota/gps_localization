@@ -58,7 +58,6 @@ void CombineGPSPositionOrientation::CallbackSentence(const nmea_msgs::SentenceCo
 	if(msg->sentence.find(type.c_str()) != std::string::npos){
 		std::vector<std::string> splitted_sentence = SplitSentence(msg->sentence, std::string(","));
 		double yaw = DegToRad( std::stod(splitted_sentence[index]) );
-		/* yaw += M_PI; //convet to utm */
 		yaw = NorthBaseToUTM(yaw);
 		yaw = PiToPi(yaw);
     	tf::Quaternion q = tf::createQuaternionFromRPY(0.0, 0.0, yaw);
